@@ -1,0 +1,37 @@
+
+let nil=create "";;
+let a=create "a";;
+let abc=create "abc";;
+let twelve=create "12";;
+let editable=create "abac12a2aAac211";;
+
+lgh nil;;
+lgh a;;
+lgh abc;;
+lgh twelve;;
+
+nonempty nil;;
+nonempty a;;
+nonempty twelve;;
+
+concat nil nil;;
+concat nil a;;
+concat (create "1") nil;;
+concat (create "1A") abc;;
+
+reverse nil;;
+reverse abc;;
+reverse twelve;;
+
+first nil;;
+first a;;
+first abc;;
+
+last nil;;
+last a;;
+last abc;;
+
+forward editable;;
+back editable;;
+moveTo 10 editable;;
+replace 'b' editable;;

@@ -1,0 +1,186 @@
+type exp = True |  False
+        |  Const of int
+        |  Abs   of exp
+        |  Var of string
+        |  Not   of exp
+        |  List  of exp list
+        |  Plus  of exp * exp
+        |  Minus of exp * exp
+        |  Mul   of exp * exp
+        |  Div   of exp * exp
+        |  Mod   of exp * exp
+        |  Pow   of exp * exp
+        |  And   of exp * exp
+        |  Orr   of exp * exp
+        |  Imply of exp * exp
+        |  Equal of exp * exp
+        |  Great of exp * exp
+        |  Lesss of exp * exp
+        |  Grequ of exp * exp
+        |  Leequ of exp * exp
+        |  Projjj of int * exp
+        (* New additions *)
+
+        |  LetInEnd of exp * exp * exp
+        |  Lambda of exp * exp           (* \x.e1 *)
+        |  Applyly of exp * exp            (* e1 e2 *)
+        |  Ite of exp * exp * exp        (* if then else *)
+;;
+
+krivine (CLOSURE([(Var("z"),CLOSURE([],Const(3)))],Var("z"))) [];;
+
+krivine (CLOSURE([],Plus(Plus(Const(2),Const(3)),Plus(Const(2),Const(3))))) [];;
+
+krivine (CLOSURE([(Var("z"),CLOSURE([],Const(3)))],Plus(Const(2),Var("z")))) [];;
+
+krivine (CLOSURE([],Apply(Lambda(Var("x"),Plus(Var("x"),Const(1))),Const(2)))) [];;
+
+krivine (CLOSURE([],Apply(Lambda(Var("x"),Mul(Var("x"),Plus(Var("x"),Const(1)))),Const(2)))) [];;
+
+krivine (CLOSURE([],
+            Apply(
+                Lambda(Var("x"),
+                    Apply(
+                        Lambda(Var("d"),
+                            Mul(Var("d"),Const(2))
+                        ), Const(2)
+                    )
+                ), Const(2)
+            )
+        )) [];;
+
+krivine (CLOSURE([],
+            Ite( Great(Const(8),Const(2)),
+
+                Apply(
+                    Lambda(Var("x"),
+                        Div(Var("x"),Const(2))
+                    ),Const(2)
+                ),
+
+                Apply(
+                    Lambda(Var("x"),
+                        Mul(Var("x"),Plus(Var("x"),Const(1)))
+                    ),Const(2)
+                )
+            )
+        )) [];;
+
+krivine (CLOSURE([],
+            Ite( Great(Const(1),Const(2)),
+                Apply(
+                    Lambda(Var("x"),
+                        Div(Var("x"),Const(2))
+                    ),Const(2)
+                ),
+
+                Apply(
+                    Lambda(Var("x"),
+                        Mul(Var("x"),Plus(Var("x"),Const(1)))
+                    ),Const(2)
+                )
+            )
+        )) [];;
+
+krivine (CLOSURE([],
+            LetInEnd(Var("a"), Const(2),
+                Plus(Var("a"),Const(20))
+            )
+        )) [];;
+
+krivine (CLOSURE([],
+            LetInEnd(Var("a"), Const(2),
+                Plus(Var("a"),Const(20))
+            )
+        )) [];;
+
+krivine (CLOSURE([],
+            Projj(2, List([Const(1); Const(2); Const(3)]))
+        )) [];;
+
+krivine (CLOSURE([],
+            Apply(
+                Lambda(Var("x"),
+                    LetInEnd(Var("a"), Const(2),
+                        Plus(Var("a"),Var("x"))
+                    )
+                ),Const(2)
+            )
+        )) [];;
+
+let e = Projj(2, List([Const(12);Const(121);Const(33)]));;
+execute [] [] (compile e) [];;
+
+let e = LetInEnd(Var("a"), Const(1),
+            LetInEnd(Var("b"), Const(2),
+                LetInEnd(Var("c"), Const(3),
+                    Plus(
+                        Plus(Var("a"), Var("b")),
+                        Mul(Var("c"), Const(2))
+                    )
+                )
+            )
+        )
+;;
+execute [] [] (compile e) [];;
+
+let e = Ite( Great(Const(4),Const(2)),
+            Plus(Const(1),Const(3)),
+            Minus(Const(1),Const(3))
+        );;
+execute [] [] (compile e) [];;
+
+let e = LetInEnd(Var("f"), False,
+            LetInEnd(Var("a"), Const(1),
+                LetInEnd(Var("b"), Const(2),
+                    LetInEnd(Var("c"), Const(3),
+                        Plus(
+                                Plus(Var("a"),Var("b")),
+                                Mul(Var("c"),Const(2))
+                        )
+                    )
+                )
+            )
+        )
+;;
+execute [] [] (compile e) [];;
+
+let e = Apply(
+            Lambda(Var("x"),
+                Plus(Var("x"),Const(1))
+            ), Const(2)
+        );;
+execute [] [] (compile e) [];;
+
+
+let e = Apply(
+            Lambda(Var("x"),
+                Mul(Var("x"),
+                    Plus(Var("x"),Const(1))
+                )
+            ),Const(2)
+        );;
+execute [] [] (compile e) [];;
+
+let e = Apply(
+            Lambda(Var("x"),
+                Apply(
+                    Lambda(Var("d"),
+                        Mul(Var("d"),Const(2))
+                    ),Const(2)
+                )
+            ),Const(2)
+        );;
+execute [] [] (compile e) [];;
+
+let e = LetInEnd(Var("a"),
+            LetInEnd(Var("a"),Const(1),
+                Apply(
+                    Lambda(Var("x"),
+                        Plus(Var("x"),Const(1))
+                    ), Var("a")
+                )
+            ),
+            Plus(Var("a"),Const(1))
+        );;
+execute [] [] (compile e) [];;

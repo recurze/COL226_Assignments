@@ -1,0 +1,25 @@
+Plus(Const(1),Const(2))
+Mul(Const(6),Const(6))
+(* ^(Const(2),Const(4)) *)
+Div(Const(6),Const(3))
+Var("iden1")
+Var("iden2")
+
+Abs(Const(-1))
+Projj(List([Const(12),Const(121),Const(33)]),2)
+
+Sub(Projj(List[Const(2),Const(5),Const(8)],2),Const(1))
+Mod(Projj(List[Const(2),Const(5),Const(8)],2),Const(2))
+
+Or(
+    Equal(Const(5),Const(5)),
+    And(Equal(Sub(Const(2),Const(1)),Const(1)),
+        Mod(Projj(List[Const(2),Const(5),Const(8)],2),Const(2))
+    )
+)
+
+And(True, False)
+Imply(NOT(Imply(Or(True, False), And(True, False))),Imply(And(True, False), Or(True, False)))
+
+Grequ(Const(4),Const(2))
+Leequ(Const(4),Const(2))
