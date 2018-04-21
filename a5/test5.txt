@@ -1,0 +1,73 @@
+%vs
+ht([p(v("X"),intT),p(v("Y"),intT)],v("X"),T).
+ht([p(v("X"),boolT),p(v("X"),intT)],v("X"),T).
+
+
+%Constants
+ht([],const(-652),T).
+ht([],bool(true),T).
+
+%arithmetic
+ht([],add(sub(const(2),const(5)), div(const(6),mul(const(2),const(5)))),T).
+
+%boolean
+ht([p(v("X"),boolT)],anD(imply(orr(v("X"), bool(false)), bool(true)),imply(v("X"), noT(bool(false)))),T).
+
+%comparison
+ht([p(v("X"),boolT),p(v("Y"),boolT)],orr(anD(great(const(-2), const(6)), lesss(const(const(3)),const(100))),imply(equal(const(5), v("Y")), v("X"))),T).
+
+%equality
+% equality for tuples is not taken care of.
+ht([],equal(tuple([tuple([const(1),const(3)]),bool(true)]),tuple[const(1), const(3),bool(true)])),T).
+
+%if then else
+ht([p(v("X"),boolT),p(v("Y"),intT)],ite(anD(v("X"),great(v("Y"),const(0))),v("Y"),v("X")),T).
+
+%let d in e
+ht([p(v("Y"),intT)],letin(def(v("X"),const(3)),add(v("Y"),v("X"))),T).
+ht([p(v(x),intT)],letin(def(v(y),const(3)),mul(v(y),const(5))),T).
+
+%abstraction
+ht( [p(v(x), boolT), p(v(w), boolT)], lambda(v(x), v(w)), arrowT(boolT, boolT)).
+
+%application
+ht([p(v(r), arrowT(boolT,boolT)), p(v(s), boolT)], apply(v(r), v(s)), boolT).
+ht([p(v(r), arrowT(boolT,boolT)), p(v(s), boolT)], apply(v(r), v(s)), X).
+
+%n-tuple
+ht([p(v(x), boolT), p(v(w), boolT)], tuple([v(x), v(w), anD(v(x), v(w))]), T).
+
+%projection
+ht([p(v(y), boolT), p(v(z), boolT)], proj(1, tuple([v(x), v(w), anD(v(x), v(y))])) , boolT).
+
+%constructorrs
+ht([(v(r), boolT)] ,inl(v(r)), disjunction(boolT,boolT)).
+ht([(v(r), boolT)] ,inl(v(r)), X).
+ht([(v(r), boolT)] ,inr(v(r)), disjunction(boolT,boolT)).
+
+%case analysis
+ht([(v(t), boolT), (v(r), boolT)], case(inl(v(t)), v(r)), boolT).
+ht([(v(t), boolT), (v(r), boolT)], case(inr(v(t)), v(r)), boolT).
+
+
+%type elaborrates
+
+te([],def(v("X"),add(const(3),const(4))),T).
+te([],def(v("Y"),bool(true)),T).
+te([],pll(def(v("X"),const(3)),def(v("Y"),bool(true))),T).
+te([],pll(def(v("X"),const(3)),def(v("X"),bool(true))),T).
+te([],seq(def(v("X"),mul(const(31),const(20))),def(v("Y"),bool(true))),T).
+te([p(v("X"),boolT),p(v("Y"),intT)], loc( def(v("X"), const(31)), pll(def(v("X"),tuple([v("Y")])),def(v("Y"),bool(false))) ),T).
+
+te([p(v("X"),boolT),p(v("Y"),intT)], loc( def(v("X"),const(20)), pll(def(v("X"),const(3)),def(v("Y"),bool(false)))),T).
+te([p(v(x),intT)],def(v(y),const(9)),Gamma).
+
+te([p(v(x),intT)],seq(def(v(z),bool(true)),def(v(y),bool(false))),Gamma).
+
+te([p(v(x),intT)],pll(def(v(z),const(9)),def(v(y),const(0))),Gamma).
+
+te([p(v(x),intT)],loc(def(v(z),const(9)),def(v(y),const(4))),Gamma).
+
+te([p(v(x),intT)],pll(seq(def(v(z),const(8)),def(v(y),bool(true))),def(v(y),bool(false))),Gamma).
+
+te([(v(x),intT)],seq(pll(def(v(z),const(45)),def(v(y),bool(false))),def(v(y),const(8))),Gamma).

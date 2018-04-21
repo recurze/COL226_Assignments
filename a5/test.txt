@@ -1,0 +1,55 @@
+ht([p(variable("x"), intT)], variable("x"), intT).
+
+ht([], const(5), intT).
+
+ht([], const(5), boolT).
+
+ht([], bool(true), intT).
+
+ht([], bool(true), boolT).
+
+ht([], add(const(3), const(2)), intT).
+
+ht([], mul(const(2), const(5)), boolT).
+
+ht([], orr(bool(true), bool(true)), boolT).
+
+ht([], imply(bool(false), bool(true)), intT).
+
+ht([], great(const(2), const(7)), intT).
+
+ht([], lesss(const(5), const(7)), boolT).
+
+ht([], equal(const(9), const(7)), boolT).
+
+ht([], equal(const(9), const(7)), intT).
+
+ht([], equal(bool(true), bool(false)), boolT).
+
+ht([], equal(bool(true), const(3)), boolT).
+
+ht([], ite(bool(true), const(2), const(3)), intT).
+
+ht([], ite(bool(true), const(2), bool(3)), intT).
+
+ht([], ite(bool(true), bool(true), bool(false)), boolT).
+
+ht([], ite(const(7), bool(true), bool(false)), boolT).
+
+ht([], letin(def(variable("x"), const(3)), add(variable("x"), const(3))), intT).
+
+ht([p(variable("x"), boolT), p(variable("y"), boolT)], equal(and(variable("x"), variable("y")), add(const(2), const(5))), boolT).
+
+ht(G, equal(X, Y), T).
+
+ht(G, equal(const(2), X), boolT).
+
+ht(G, equal(bool(true), X), boolT).
+
+ht([], letin(pll(def(v("x"), const(2)), def(v("y"), const(3))), add(v("x"), v("y"))), T).
+
+ht([], letin(pll(def(v("x"), const(2)), def(v("x"), const(3))), add(v("x"), v("x"))), T).
+
+ht(G, lambda(v("x"), mul(v("x"), const(3))), T).
+
+ht(G, apply(lambda(v("x"), mul(v("x"), const(3))), const(2)), T).
