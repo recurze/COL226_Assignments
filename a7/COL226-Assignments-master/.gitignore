@@ -1,0 +1,8 @@
+*.zip
+*.out
+*.o
+*.cm*
+*.mlla
+*.mla
+*.yy.*
+*.tab.*

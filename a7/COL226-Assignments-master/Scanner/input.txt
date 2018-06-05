@@ -1,0 +1,5 @@
+3 + 4 - 5 * 7 div 8 mod 9 ^ 55 ^ 009 - 0 ; <= -99
+>= 88 > 99 > 0 not 5abc anc034 abs abs32 if ( 99 ) then
+ do this else foo! def haha ( 00 ) ; return T else
+ return F ; T \/ F = T but T /\ F = F
+if(33>77)then do this; else if (33-(-99)>88)then return T;

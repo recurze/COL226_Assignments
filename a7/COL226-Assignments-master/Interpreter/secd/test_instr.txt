@@ -1,0 +1,5 @@
+#load "lexer.cmo";;
+#load "parser.cmo";;
+#use "interpreter_secd.ml";;
+
+solve "test_prog.ml";;

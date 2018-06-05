@@ -1,0 +1,12 @@
+["family.pl"].
+bastard(A,B).
+sibling("Robb Stark",X).
+relation("Jon Snow","Arya Stark",X).
+relation("Rickard Stark","Arya Stark",X).
+husband(X,"Daenerys Targaryen").
+aunt(X,"Rhaegar Targaryen").
+uncle("Drogo",X).
+relation("Rhaegar Targaryen","Aerys II Targaryen",X).
+relation("Drogo","Viserys Targaryen",X).
+grandfather("Aegon V Targaryen",X).
+grandmother("Lyarra Stark",X).

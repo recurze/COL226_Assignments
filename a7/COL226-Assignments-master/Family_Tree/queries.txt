@@ -1,0 +1,13 @@
+["family"].
+bastard(A,B),write(A),write(" is bastard of "),write(B),nl,fail;true.
+write("Siblings of Robb Stark:\n"),sibling("Robb Stark",X),write("\t"),write(X),nl,fail;true.
+relation("Jon Snow","Arya Stark",X),write("Jon Snow and Arya Stark are related as : "),write(X),nl,fail;true.
+relation("Rickard Stark","Arya Stark",X),write("Rickard Stark and Arya Stark are related as : "),write(X),nl,fail;true.
+husband(X,"Daenerys Targaryen"),write(X),write(" is husband of Daenerys Targaryen"),nl,fail;true.
+aunt(X,"Rhaegar Targaryen"),write(X),write(" is aunt of Rhaegar Targaryen"),nl,fail;true.
+uncle("Drogo",X),write("Drogo is uncle of : "),write(X),nl,fail;true.
+relation("Rhaegar Targaryen","Aerys II Targaryen",X).
+relation("Drogo","Viserys Targaryen",X).
+grandfather("Aegon V Targaryen",X).
+grandmother("Lyarra Stark",X).
+uncle("Aemon Targaryen",X).
